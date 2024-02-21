@@ -21,7 +21,7 @@ import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 //import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 //import { ValidationPipe } from 'src/common/pipes/validation.pipe';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+//import { RolesGuard } from 'src/common/guards/roles.guard';
 import { Roles } from 'src/common/decorators/roles.decorator';
 
 @Controller('cats')
@@ -36,7 +36,7 @@ export class CatsController {
 
   @Post()
   @Roles(['admin'])
-  @UseGuards(RolesGuard)
+  //@UseGuards(RolesGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
