@@ -11,7 +11,7 @@ import {
   BadRequestException,
   UseFilters,
   UsePipes,
-  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 //import { createCatSchema } from './schema/create-cat.schema';
@@ -23,8 +23,13 @@ import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 //import { RolesGuard } from 'src/common/guards/roles.guard';
 import { Roles } from 'src/common/decorators/roles.decorator';
+import { LoggingInterceptor } from 'src/common/interceptors/logging.interceptor';
+import { TransformInterceptor } from 'src/common/interceptors/transform.interceptor';
+import { TimeoutInterceptor } from 'src/common/interceptors/timeout.interceptor';
+//import { ErrorsInterceptor } from 'src/common/interceptors/errors.interceptor';
 
 @Controller('cats')
+@UseInterceptors(LoggingInterceptor, TransformInterceptor, TimeoutInterceptor)
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
